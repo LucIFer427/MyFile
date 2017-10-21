@@ -1,0 +1,45 @@
+---
+title: "范思源 2016200002 第一次作业"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 作业一 Rmarkdown的使用
+
++ 以下两张截图为Github使用的过程
++ ![](https://github.com/LucIFer427/MyFile/blob/master/jt1.jpg?raw=true)
+    这是我下载Github客户端后，在上面查看老师的文件夹中的内容
++ ![](https://github.com/LucIFer427/MyFile/blob/master/jt2.jpg?raw=true)
+     这是我创建自己的版本库，将之前的课件全部导入,并再上传至自己的版本库的过程
+
+
+## 作业二 数据读入
+
++ 将数据用R读入，并回答问题
+```{r}
+library(haven)
+cgss2013_14 <- read_sav("C:/Users/q/Desktop/cgss2013_14.sav")
+#"https://github.com/LucIFer427/MyFile/blob/master/cgss2013_14.sav?raw=true"
+#View(cgss2013_14)
+```
+    由于链接打开超时，我在knit时用本地文件代替，将源文件的链接改为注释
++ 这个数据有多少个观察案例？多少个变量？
+```{r}
+dim(cgss2013_14)
+```
+    数据共有11438个观察案例，共722个变量
++ 变量a10是政治面貌变量，请问调查数据中中共党员有多少人？
+```{r}
+#cgss2013_14$a10
+table(cgss2013_14$a10)
+```
+    调查数据中中共党员共有1161人
++ 尝试将政治面貌的条形图做出来
+```{r}
+totalstats <- table(cgss2013_14$a10)
+names(totalstats) <- c("拒绝回答缺失值","不知道缺失值","中共党员","民主党派","共青团员","群众")
+barplot(totalstats,main="政治面貌条形图",xlab="政治面貌",ylab="人数")
+``` 
